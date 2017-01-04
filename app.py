@@ -9,7 +9,7 @@ This file creates your application.
 import os
 import pg
 from flask import Flask, render_template, request, redirect, url_for, session
-from werkzeug.utils import secure_filename
+# from werkzeug.utils import secure_filename
 
 import sys
 
