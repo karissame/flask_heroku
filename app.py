@@ -8,39 +8,55 @@ This file creates your application.
 
 import os
 import pg
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
+from werkzeug.utils import secure_filename
 
 import sys
 
 reload(sys)
 sys.setdefaultencoding('utf8')
 
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
+app.config['UPLOAD_FOLDER'] = "/Users/DSS-Mac/htdocs/myPhonebook/static/profilepics/"
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
+home_dir = os.path.join(app.config['UPLOAD_FOLDER'],"")
 
 DBUSER=os.environ.get('DBUSER', True)
 DBPASS=os.environ.get('DBPASS', True)
 DBHOST=os.environ.get('DBHOST', True)
 DBNAME=os.environ.get('DBNAME', True)
-
+db=pg.DB(host=DBHOST, user=DBUSER, passwd=DBPASS, dbname=DBNAME)
 ###
 # Routing for your application.
 ###
+activeTab={"home":"","addEntries":"","updateEntry":""}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.lower().rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+class Database:
+    @staticmethod
+    def escape(value):
+        return value.replace("'","''")
+
+#If user is logged in and admin, Grab all db entries, cast tuples to a list, then for each, check if photo_ext is anything. If so, concatenate the id, '.', and ext to generate image filename and store it as such in the new list 'l'. If no valid value, use placeholder.jpg instead for the filename.
+
+#If user is basic user, do the same but only their entries. If not an authenticated user, redirect to login form indefinitely.
 
 @app.route('/')
 def home():
     """Render website's home page."""
-    db=pg.DB(host=DBHOST, user=DBUSER, passwd=DBPASS, dbname=DBNAME)
     query=db.query("select * from album")
     result_list = query.namedresult()
     return render_template('home.html',result_list=result_list)
 
 
-@app.route('/about/')
-def about():
-    """Render the website's about page."""
-    return render_template('about.html')
+
 
 
 ###
