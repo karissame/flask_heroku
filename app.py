@@ -159,17 +159,12 @@ def submit_login():
     print result_list
     if result_list:
         result = result_list[0]
-        print result
         username = result.username
-        id = result.id
-        print username
         if result.password == Database.escape(password):
             print "successfully logged in"
             session['username'] = username
-            print session['username']
-            # print result.id
-            # session['userid'] = result.id
-            # session['admin'] = result.admin
+            session['userid'] = result.id
+            session['admin'] = result.admin
             print "about to redirect"
     return redirect('/')
 
