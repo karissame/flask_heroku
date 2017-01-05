@@ -164,7 +164,6 @@ def submit_login():
         if result.password == Database.escape(password):
             print "successfully logged in"
             session['username'] = username
-            flash(session['username'])
             print session['username']
             # session['userid'] = result.id
         #     session['admin'] = result.admin
