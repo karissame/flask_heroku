@@ -169,7 +169,8 @@ def submit_login():
             print session['username']
             # print result.id
             # session['userid'] = result.id
-        #     session['admin'] = result.admin
+            # session['admin'] = result.admin
+            print "about to redirect"
     return redirect('/')
 
 @app.route('/logout')
