@@ -161,8 +161,8 @@ def submit_login():
         result = result_list[0]
         username = result.username
         print username
-        # if result.password == Database.escape(password):
-        #     # successfully logged in
+        if result.password == Database.escape(password):
+            print successfully logged in
         #     session['username'] = username
         #     session['userid'] = result.id
         #     session['admin'] = result.admin
