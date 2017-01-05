@@ -157,14 +157,15 @@ def submit_login():
     query = db.query("select * from myuser where username = '%s'" % Database.escape(username))
     result_list = query.namedresult()
     print result_list
-    # if result_list:
-    #     result = result_list[0]
-    #     username = result.username
-    #     if result.password == Database.escape(password):
-    #         # successfully logged in
-    #         session['username'] = username
-    #         session['userid'] = result.id
-    #         session['admin'] = result.admin
+    if result_list:
+        result = result_list[0]
+        username = result.username
+        print username
+        # if result.password == Database.escape(password):
+        #     # successfully logged in
+        #     session['username'] = username
+        #     session['userid'] = result.id
+        #     session['admin'] = result.admin
     return redirect('/')
 
 @app.route('/logout')
