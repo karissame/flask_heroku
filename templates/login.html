@@ -1,0 +1,18 @@
+{% extends "listings.html" %}
+{% block maincontent %}
+<h1>Please Login to View Listings</h1>
+<form action="/submit_login" method="POST" enctype="multipart/form-data">
+  <p>
+    <label for="name">Username</label><br>
+    <input type="text" size="12" name="username">
+  </p>
+  <p>
+    <label for="password">Password</label><br>
+    <input type="text" size="12" name="password">
+  </p>
+  <p>
+    <button class = "btn" type="submit" value="submit">Login</button>
+    <a href="/create"><button class = "btn" value="create">Create Account</button></a>
+  </p>
+</form>
+{% endblock %}
