@@ -60,7 +60,6 @@ def listings():
         result_list=query.namedresult()
         l = []
         for each in result_list:
-
             l.append(list(each))
         print l
         for i in l:
@@ -78,12 +77,12 @@ def listings():
         print 'Sending you to login page'
         return render_template("login.html", activeTab=activeTab)
 
-@app.route('/favicon.ico')
+@app.route("/favicon.ico")
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-@app.route("/update_entry")
-def updateEntry(methods = ['GET']):
+@app.route("/update_entry", methods = ['GET'])
+def updateEntry():
     id = request.args.get('id')
     print id
     print session.get('userid')
