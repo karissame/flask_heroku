@@ -165,6 +165,7 @@ def submit_login():
             print "successfully logged in"
             session['username'] = username
             print session['username']
+            print result.id
             # session['userid'] = result.id
         #     session['admin'] = result.admin
     return redirect('/')
