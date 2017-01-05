@@ -159,6 +159,7 @@ def submit_login():
     print result_list
     if result_list:
         result = result_list[0]
+        print result
         username = result.username
         print username
         if result.password == Database.escape(password):
