@@ -49,6 +49,7 @@ class Database:
 #If user is basic user, do the same but only their entries. If not an authenticated user, redirect to login form indefinitely.
 @app.route("/")
 def listings():
+    print "Hello World"
     setActiveTab("home")
     if session.get('username'):
         print 'You are logged in.'
